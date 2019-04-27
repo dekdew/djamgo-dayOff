@@ -1,1 +1,1 @@
-# djamgo-dayOff
+# django-dayOff
