@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day Off</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-warning bg-warning text-dark">
+    <a class="navbar-brand">Day Off</a>
+    <form class="form-inline">
+        <a href="{% url 'logout' %}" class="btn btn-outline-dark my-2 my-sm-0">Logout</a>
+    </form>
+</nav>
+
+<div class="container mt-3">
+    <h1>My Day Off Report</h1>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Type</th>
+            <th style="width: 50%" scope="col">Reason</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dayOff in dayOff_list %}
+            <tr>
+                {% if dayOff.type == '01' %}
+                    <td>Personal</td>
+                {% elif dayOff.type == '02' %}
+                    <td>Sick</td>
+                {% endif %}
+                <td>{{ dayOff.reason }}</td>
+                <td>{{ dayOff.date_start }}</td>
+                <td>{{ dayOff.date_end }}</td>
+                {% if dayOff.approve_status == '01' %}
+                    <td>
+                        <span class="badge badge-warning text-white">Wait</span>
+                    </td>
+                {% elif dayOff.approve_status == '02' %}
+                    <td>
+                        <span class="badge badge-danger text-white">Decline</span>
+                    </td>
+                {% elif dayOff.approve_status == '03' %}
+                    <td>
+                        <span class="badge badge-success text-white">Approve</span>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'newDayOff' %}" class="btn btn-warning btn-sm">ยื่นคำขอลางาน</a>
+</div>
+</body>
+</html>
