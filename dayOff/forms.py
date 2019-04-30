@@ -10,9 +10,16 @@ class DayOffModelForm(forms.ModelForm):
   print(">>>", now)
   if ('2019-04-11' < now):
     print('inin')
+
   class Meta:
     model = DayOff
     exclude = ['create_by', 'approve_status']
+
+    widgets = {
+      'reason': forms.Textarea(attrs={'placeholder': 'Your reason for day off.'}),
+      'date_start': forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+      'date_end': forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}),
+    }
 
   def clean(self):
     cleaned_data = super().clean()

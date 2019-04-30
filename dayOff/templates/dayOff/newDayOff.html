@@ -14,8 +14,8 @@
         <form method="POST" action="{% url 'newDayOff' %}">
             {% csrf_token %}
             {{ form|crispy }}
-            <a href="{% url 'index' %}"  class="btn btn-outline-warning my-3">กลับหน้าแรก</a>
-            <button type="submit" class="btn btn-warning my-3">ส่ง</button>
+            <a href="{% url 'index' %}"  class="btn btn-outline-warning my-3">Back</a>
+            <button type="submit" class="btn btn-warning my-3 text-white">Send</button>
         </form>
     </div>
 </body>
